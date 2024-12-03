@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Draggable</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/font-awesome.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body>
+    <div class="mousesplit" style="height: 100vh">
+      <div class="container">
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis
+          asperiores dolores atque, nam aspernatur similique voluptatum
+          doloribus corporis! Eos libero laboriosam fuga, ducimus doloremque
+          corrupti itaque adipisci facilis a ipsum!
+        </p>
+      </div>
+    </div>
+
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/gsap-js.js"></script>
+    <!-- <script src="assets/js/draw-svg.js"></script>
+    <script src="assets/js/draggbale.js"></script> -->
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        gsap.config({ trialWarn: false });
+        function createSpreadEffect(x, y) {
+          const spreadeffect = document.createElement("div");
+          const size = Math.random();
+          spreadeffect.className = "spread-effect";
+          spreadeffect.style.width = `${size}px`;
+          spreadeffect.style.height = `${size}px`;
+          spreadeffect.style.left = `${x - size / 2}px`;
+          spreadeffect.style.top = `${y - size / 2}px`;
+          const color = `#000`;
+          
+          spreadeffect.style.backgroundColor = color;
+
+          document.body.appendChild(spreadeffect);
+
+          gsap.to(spreadeffect, {
+            scale: 1,
+            opacity: 1,
+            duration: 1,
+            onComplete: () => {
+              spreadeffect.remove();
+            },
+          });
+        }
+        document.addEventListener("mousemove", (event) => {
+          createSpreadEffect(event.clientX, event.clientY);
+        });
+      });
+    </script>
+  </body>
+</html>

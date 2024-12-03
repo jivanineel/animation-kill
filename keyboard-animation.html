@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Draggable</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/font-awesome.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body>
+    <div class="draggable">
+      <div class="container">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 448 512"
+          class="arrow"
+          id="arrow"
+        >
+          <path
+            d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"
+          />
+        </svg>
+      </div>
+    </div>
+
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/gsap-js.js"></script>
+    <script src="assets/js/scroll-trigger.js"></script>
+    <script src="assets/js/scroll-smother.js"></script>
+    <script src="assets/js/draw-svg.js"></script>
+    <script src="assets/js/draggbale.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        gsap.config({ trialWarn: false });
+
+        let arrow = document.getElementById("arrow");
+        let rotation = 0;
+        let xPos = 0;
+        let yPos = 0;
+        // let position = 0
+        
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "ArrowLeft") {
+            rotation -= 25;
+            gsap.to(arrow, { rotate: rotation, duration: 0.5 });
+          } else if (e.key === "ArrowRight") {
+            rotation += 25;
+            gsap.to(arrow, { rotate: rotation, duration: 0.5 });
+          } else if (e.key === "ArrowUp") {
+            const radians = (rotation * Math.PI) / 180;
+            const distance = 25;
+            xPos += distance * Math.cos(radians);
+            yPos += distance * Math.sin(radians);
+            gsap.to(arrow, { x: xPos, y: yPos, duration: 0.5 });
+          }
+          else if (e.key === "ArrowDown") {
+            const radians = (rotation * Math.PI) / 180;
+            const distance = 25;
+            xPos -= distance * Math.cos(radians);
+            yPos -= distance * Math.sin(radians);
+            gsap.to(arrow, { x: xPos, y: yPos, duration: 0.5 });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
